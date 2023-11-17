@@ -1,9 +1,13 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 
+// Serve Angular app
+app.use(express.static(path.join(__dirname, 'designio','dist','designio', 'browser')));
+
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  res.sendFile(path.join(__dirname, 'designio','dist','designio', 'browser', 'index.html'));
 });
 
 app.listen(port, () => {
