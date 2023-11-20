@@ -17,7 +17,7 @@ app.use('/auth', authRoutes);
 
 // Define a route for the home page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'view', 'login.html'));
+  res.redirect('/auth/login');
 });
 
 // console.log('Declared routes:', listEndpoints(app));
