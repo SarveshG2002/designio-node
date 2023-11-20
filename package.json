@@ -1,23 +1,21 @@
 {
-  "name": "designio-node",
+  "name": "scratch",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SarveshG2002/designio-node.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SarveshG2002/designio-node/issues"
-  },
-  "homepage": "https://github.com/SarveshG2002/designio-node#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "express-list-endpoints": "^6.0.0",
+    "express-session": "^1.17.3",
+    "mongoose": "^8.0.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   }
 }
