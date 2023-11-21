@@ -19,25 +19,28 @@ router.get('/login', (req, res) => {
     
 });
 
-router.post('/login', (req, res) => {
-    // console.log(req)
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Replace with your authentication logic
-    const isValidUser = authController.authenticateUser(email, password);
+    try {
+        const user = await authController.authenticateUser(email, password);
 
-    if (isValidUser) {
-        // Store user information in the session
-        req.session.user = {
-            // username: 'example_user',
-            email: email
-        };
+        if (user) {
+            // Store user information in the session
+            req.session.user = {
+                username: user.username,
+                email: user.email
+            };
 
-        // Render the profile page with user data
-        // res.render('profile', { user: req.session.user });
-        res.redirect('/auth/profile');
-    } else {
-        res.redirect('/auth/login');
+            // Redirect to the user's profile page
+            res.redirect('/auth/profile');
+        } else {
+            // Authentication failed
+            res.redirect('/auth/login');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
 });
 

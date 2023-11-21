@@ -1,14 +1,22 @@
-const User = require('../models/User');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
+// controllers/AuthController.js
 
-// Implement registration and login logic here
-function authenticateUser(email, password) {
-    // Replace with your authentication logic
-    // For simplicity, let's assume the authentication is successful for any email and password
-    return true;
+const bcrypt = require('bcrypt');
+const User = require('../models/User');
+
+async function authenticateUser(email, password) {
+  try {
+    const user = await User.findOne({ email });
+    // console.log(user);
+    if (user && await bcrypt.compare(password, user.password)) {
+      return user;
+    }
+
+    return null;
+  } catch (error) {
+    throw error;
   }
-  
-  module.exports = {
-    authenticateUser
-  };
+}
+
+module.exports = {
+  authenticateUser,
+};
