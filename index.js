@@ -11,12 +11,15 @@ const listEndpoints = require('express-list-endpoints');
 const app = express();
 const PORT = 3000;
 
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 // Use the routes defined in auth.js
 app.use(session({
   secret: 'jhbfsdbjfsdfhsjfvbsjfgvbhjbghvbfgbsdhfgbvusyfgvbhb', // Change this to a strong, secure secret
   resave: false,
   saveUninitialized: false
 }));
+app.use(express.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'public', 'view'));

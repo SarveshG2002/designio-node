@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-
+const authController = require('../controllers/AuthController');
 
 // Define a route for user login
 router.get('/login', (req, res) => {
@@ -12,7 +12,7 @@ router.get('/login', (req, res) => {
     if (user) {
         // res.sendFile(path.join(__dirname, '../public/view/profile.ejs'));
         // res.send(`Welcome, ${user.username}!`);
-        res.redirect('/auth/pofile');
+        res.redirect('profile');
     } else {
         res.render('login');
     }
@@ -20,16 +20,17 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    // console.log(req)
     const { email, password } = req.body;
 
     // Replace with your authentication logic
-    const isValidUser = authenticateUser(email, password);
+    const isValidUser = authController.authenticateUser(email, password);
 
     if (isValidUser) {
         // Store user information in the session
         req.session.user = {
-            username: 'example_user',
-            email: 'user@example.com'
+            // username: 'example_user',
+            email: email
         };
 
         // Render the profile page with user data
@@ -58,7 +59,7 @@ router.get('/profile', (req, res) => {
         // res.send(`Welcome, ${user.username}!`);
         res.render('profile', { user: req.session.user });
     } else {
-        res.redirect('/auth/login');
+        res.redirect('auth/login');
     }
     
 });
