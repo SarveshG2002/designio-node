@@ -131,7 +131,7 @@ async function updateProfile(req, res) {
 
 
         // Redirect to the home page
-        return res.redirect('/');
+        return res.redirect('/auth/login');
       } catch (error) {
         console.error(error);
         return res.status(500).send('Internal Server Error');

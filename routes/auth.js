@@ -8,11 +8,18 @@ const authController = require('../controllers/AuthController');
 // Define a route for user login
 router.get('/login', (req, res) => {
     const user = req.session.user;
+    console.log(req.session.user)
     // console.log(user)
     if (user) {
         // res.sendFile(path.join(__dirname, '../public/view/profile.ejs'));
         // res.send(`Welcome, ${user.username}!`);
-        res.redirect('profile');
+        if(user.status=="complete"){
+
+            res.render('home');
+        }else{
+            res.redirect('profile');
+        }
+        
     } else {
         res.render('login');
     }
@@ -29,7 +36,8 @@ router.post('/login', async (req, res) => {
             // Store user information in the session
             req.session.user = {
                 username: user.username,
-                email: user.email
+                email: user.email,
+                status : "complete"
             };
 
             // Redirect to the user's profile page
@@ -55,12 +63,14 @@ router.post('/register', authController.registerUser);
 
 router.get('/profile', (req, res) => {
     const user = req.session.user;
-
+    console.log(req.session.user)
     if (user) {
         // res.sendFile(path.join(__dirname, '../public/view/profile.html'));
         // res.send(`Welcome, ${user.username}!`);
         if(user.status == "profile_pending"){
             res.render('profile', { user: req.session.user,errors: [] });
+        }else{
+            res.redirect('/auth/login');
         }
        
     } else {
