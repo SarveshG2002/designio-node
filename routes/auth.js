@@ -69,6 +69,8 @@ router.get('/profile', (req, res) => {
     
 });
 
+router.post('/update_profile' , authController.updateProfile);
+
 // Add more routes as needed for authentication
 
 module.exports = router;

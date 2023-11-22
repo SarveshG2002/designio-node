@@ -2,6 +2,10 @@
 
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Profile = require('../models/Profile');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 async function authenticateUser(email, password) {
   try {
@@ -60,7 +64,87 @@ async function registerUser(req, res) {
   }
 }
 
+
+// Multer configuration for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/profile/profile_pictures'); // Set the destination folder
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = uuidv4(); // Add a unique suffix to the filename
+    const fileExtension = path.extname(file.originalname); // Get the file extension
+    cb(null, `${file.fieldname}-${uniqueSuffix}${fileExtension}`);
+  },
+});
+
+const upload = multer({ storage });
+
+async function updateProfile(req, res) {
+  try {
+    // File upload middleware
+    upload.single('profile_picture')(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading
+        return res.status(500).send('Multer Error');
+      } else if (err) {
+        // An unknown error occurred when uploading
+        return res.status(500).send('Unknown Error');
+      }
+
+      try {
+        let profilePicturePath = null;
+
+        // Check if a profile image is uploaded
+        if (req.file) {
+          profilePicturePath = req.file.path;
+        }
+
+        // Insert user data into the profile collection
+        const userId = req.session.user._id;
+        const { username, bio, profession, experience, skills, location, presence, gender } = req.body;
+        const serverTimestamp = new Date();
+        await Profile.findOneAndUpdate(
+          { user_id: userId },
+          {
+            username,
+            bio,
+            profession,
+            experience,
+            skills,
+            location,
+            presence,
+            gender,
+            profile_picture: profilePicturePath,
+            created_at: serverTimestamp,
+      updated_at: serverTimestamp,
+          },
+          { upsert: true }
+        );
+        const existingUser = await User.findOne({ email });
+        // Update the session data (if needed)
+        req.session.user.status = "complete";
+        
+        req.session.user.username = username;
+        req.session.user.profileimg = profilePicturePath;
+        req.session.user.name = existingUser.name;
+        req.session.user.email = existingUser.email;
+
+
+        // Redirect to the home page
+        return res.redirect('/');
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send('Internal Server Error');
+  }
+}
+
 module.exports = {
   authenticateUser,
   registerUser,
+  updateProfile,
 };
