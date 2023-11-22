@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth'); // Import the auth.js file
 const listEndpoints = require('express-list-endpoints');
 
+process.env.TZ = 'Asia/Kolkata';
 
 const app = express();
 const PORT = 3000;

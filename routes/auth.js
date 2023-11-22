@@ -50,9 +50,8 @@ router.get('/register', (req, res) => {
     // res.sendFile(path.join(__dirname, '../public/view/register.html'));
     res.render('register')
 });
-router.post('/register', (req, res) => {
-    res.send("register succces");
-});
+
+router.post('/register', authController.registerUser);
 
 router.get('/profile', (req, res) => {
     const user = req.session.user;
@@ -60,9 +59,12 @@ router.get('/profile', (req, res) => {
     if (user) {
         // res.sendFile(path.join(__dirname, '../public/view/profile.html'));
         // res.send(`Welcome, ${user.username}!`);
-        res.render('profile', { user: req.session.user });
+        if(user.status == "profile_pending"){
+            res.render('profile', { user: req.session.user,errors: [] });
+        }
+       
     } else {
-        res.redirect('auth/login');
+        res.redirect('/auth/login');
     }
     
 });
