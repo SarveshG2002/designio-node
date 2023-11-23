@@ -34,14 +34,23 @@ router.post('/login', async (req, res) => {
 
         if (user) {
             // Store user information in the session
-            req.session.user = {
-                username: user.username,
-                email: user.email,
-                status : "complete"
-            };
+            if(user[1]=="complete"){
+                req.session.user = {
+                    username: user[0].username,
+                    email: user[0].email,
+                    status : user[1],
+                    _id: user[0]._id,
+                };
+            }else{
+                req.session.user = {
+                    _id: user[0]._id,
+                    status: "profile_pending",
+                  };
+            }
+            
 
             // Redirect to the user's profile page
-            res.redirect('/auth/profile');
+            res.redirect('/auth/login');
         } else {
             // Authentication failed
             res.redirect('/auth/login');

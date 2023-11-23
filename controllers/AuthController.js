@@ -12,7 +12,11 @@ async function authenticateUser(email, password) {
     const user = await User.findOne({ email });
     // console.log(user);
     if (user && await bcrypt.compare(password, user.password)) {
-      return user;
+      const userProfile = await Profile.findOne({user_id:user._id})
+      if(userProfile){
+        return [user,"complete"];
+      }
+      return [user,"profile_pending"];
     }
 
     return null;
@@ -52,7 +56,7 @@ async function registerUser(req, res) {
 
     // Authenticate the newly registered user
     req.session.user = {
-      id: newUser._id,
+      _id: newUser._id,
       status: "profile_pending",
     };
 
@@ -98,9 +102,10 @@ async function updateProfile(req, res) {
         if (req.file) {
           profilePicturePath = req.file.path;
         }
-
+        
         // Insert user data into the profile collection
         const userId = req.session.user._id;
+        console.log(userId);
         const { username, bio, profession, experience, skills, location, presence, gender } = req.body;
         const serverTimestamp = new Date();
         await Profile.findOneAndUpdate(
@@ -120,7 +125,7 @@ async function updateProfile(req, res) {
           },
           { upsert: true }
         );
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ _id:userId });
         // Update the session data (if needed)
         req.session.user.status = "complete";
         
