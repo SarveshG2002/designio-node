@@ -1,0 +1,305 @@
+*{
+    font-family: 'AR One Sans', sans-serif;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    color: #673ab7;
+}
+.middle{
+    /* background-color: aquamarine; */
+}
+.middle .feedDiv{
+    width: 90%;
+    /* height: 200px; */
+    
+    margin: 10px auto;
+}
+
+
+
+
+.middle .feedDiv .statuscontainer{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.middle .feedDiv .statuscontainer .todaystatus{
+    width: fit-content;
+    height: 100%;
+    border-radius: 20%;
+    display: inline-block;
+}
+
+.chip {
+    display: inline-block;
+    background-color: #8858db;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chip-input{
+    width: 80%;
+    border: none;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 15px;
+    outline: none;
+    color: #9DBFAF;
+    background-color: #eeeeee
+}
+
+#discriptionpreview{
+    font-size:11px !important;
+}
+
+.middle .feedDiv .statuscontainer .ostatus{
+    margin-left: 10px;
+}
+
+.middle .feedDiv .statuscontainer .post_something{
+    font-family: 'AR One Sans', sans-serif;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-width: 0px 0px 1px 0px;
+    border-style: ridge;
+}
+
+.middle .feedDiv .statuscontainer .newpost textarea{
+    width: 90%;
+    border: none;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 15px 0 0 15px;
+    outline: none;
+    color: #673ab7;
+    background-color: #eeeeee;
+}
+
+.middle .newFeedDiv .statuscontainer{
+    height: auto;
+}
+.middle .newFeedDiv .statuscontainer .newpost textarea{
+    height: auto;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.middle .feedDiv .statuscontainer .newpost button{
+    width: 40px;
+    height: 36px;
+    border: 1px solid #eeeeee;
+    background: #eeeeee;
+    text-align: center;
+    color: #949494;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+.middle .newFeedDiv .newfeedcreator .imagecontent{
+    display: grid;
+    grid-template-columns: 50% auto;
+}
+.middle .newFeedDiv .newfeedcreator .imagecontent .button{
+    width: fit-content;
+    padding: 10px;
+    background-color: #8858db;
+    color: white;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.middle .newFeedDiv .newfeedcreator .imagecontent .imagename{
+    border-width: 0px 0px 0.5px 0px;
+    /* border-style: ridge; */
+    border-color: #8858db;
+    width: auto;
+    display: inline-block;
+}
+
+.middle .newFeedDiv .newfeedcreator .imagecontent #imagePreview{
+    /* width: 100%; */
+}
+
+.middle .feedDiv .statuscontainer .todaystatus img{
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+.middle .feedDiv .feedcontainer{
+    width: 100%;
+    height: 80vh;
+    /* padding: 10px; */
+    /* background-color: rgb(246, 246, 246); */
+    /* border-radius: 20px; */
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.middle .feedDiv .feedcontainer .feed {
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.middle .feedDiv .feedcontainer .feed .userinfo{
+    display: grid;
+    grid-template-columns: 50px auto;
+}
+
+.middle .feedDiv .feedcontainer .feed .userinfo .userprofile img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.middle .feedDiv .feedcontainer .feed .userinfo .username{
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color: #673ab7;
+    margin: 5px 0px 5px 20px;
+}
+
+.middle .feedDiv .feedcontainer .feed .discription{
+    font-family: 'AR One Sans', sans-serif;
+font-family: 'Croissant One', cursive;
+font-family: 'Rubik', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    color: #673ab7;
+    margin: 5px;
+}
+.middle .feedDiv .feedcontainer .feed .artwork{
+    width: 100%;
+}
+
+.middle .feedDiv .feedcontainer .feed .artwork img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.middle .feedDiv .feedcontainer .feed .reach{
+    display: grid;
+    grid-template-columns: 15% 15% auto;
+    text-align: center;
+    color:#673ab7;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    /* display: in; */
+}
+
+
+
+
+
+
+.likeDiv i {
+    cursor:pointer;
+   
+    display:inline-block;
+   
+    color:#aaa;
+    /* transition:.2s; */
+  }
+  
+  .likeDiv i:hover {
+    color:#666;
+  }
+  
+  .likeDiv i:before {
+    font-family:fontawesome;
+    content:'\f004';
+    font-style:normal;
+  }
+  
+  
+  
+  .likeDiv i.press {
+    animation: size .4s;
+    color:#e23b3b;
+  }
+
+
+
+.comment {
+    width: 100%;
+    position: relative;
+    display: flex;
+    }
+
+.comment .commentTerm {
+    width: 100%;
+    border: none;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 15px 0 0 15px;
+    outline: none;
+    color: #9DBFAF;
+    background-color: #eeeeee
+}
+
+.comment .commentTerm:focus{
+     color: #673ab7;
+}
+
+.comment .commentButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #eeeeee;
+    background: #eeeeee;
+    text-align: center;
+    color: #949494;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the comment bar change!*/
+.comment .wrap{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

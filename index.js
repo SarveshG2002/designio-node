@@ -37,6 +37,7 @@ app.set('views', path.join(__dirname,'public', 'view'));
 app.get('/', (req, res) => {
   res.redirect('auth/login');
 });
+app.use(express.static('public/public'));
 
 // console.log('Declared routes:', listEndpoints(app));
 
