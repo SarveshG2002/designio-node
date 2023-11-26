@@ -1,1 +1,19 @@
-Home
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('include/layout-header.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <div class="main_container">
+        <%- include('include/navbar.ejs') %>
+        <div class="container">
+            <div class="sidebar">
+                <%- include('include/sidebar.ejs', { page: 'feed' }) %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
