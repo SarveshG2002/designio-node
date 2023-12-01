@@ -301,7 +301,7 @@
                             </div>
 
                         </div>
-                        <form action="post/addpost" method="POST" id="addnepostform" enctype="multipart/form-data">
+                        <form action="/post/addpost" method="POST" id="addnepostform" enctype="multipart/form-data">
                             
         
                             <div class="feedDiv newFeedDiv" id="newFeedDiv" style="display:none">
@@ -444,6 +444,25 @@
                 chip.addEventListener('click', function () {
                     chip.remove();
                 });
+            }
+
+            function submitForm() {
+                // Collect chip values
+                const chips = Array.from(chipsContainer.querySelectorAll('.chip'))
+                    .map(chip => chip.textContent.replace('#', '')); // Remove '#' prefix
+
+                // Add chips as hidden input fields to the form
+                const form = document.querySelector('#addnepostform');
+                chips.forEach(chip => {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'chips[]'; // Use an array for multiple values
+                    hiddenInput.value = chip;
+                    form.appendChild(hiddenInput);
+                });
+
+                // Submit the form
+                form.submit();
             }
         </script>
     </body>

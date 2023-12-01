@@ -6,6 +6,7 @@ const ejs = require('ejs');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth'); // Import the auth.js file
+const postsRoutes = require('./routes/posts');
 const listEndpoints = require('express-list-endpoints');
 
 process.env.TZ = 'Asia/Kolkata';
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect('mongodb://localhost:27017/designio', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('debug', true);
 app.use('/auth', authRoutes);
+app.use('/post',postsRoutes)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname,'public', 'view'));
 
@@ -37,6 +39,7 @@ app.set('views', path.join(__dirname,'public', 'view'));
 app.get('/', (req, res) => {
   res.redirect('auth/login');
 });
+
 app.use(express.static('public/public'));
 
 // console.log('Declared routes:', listEndpoints(app));
