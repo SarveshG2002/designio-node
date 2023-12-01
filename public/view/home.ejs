@@ -1,49 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('include/layout-header.ejs') %>
-<link rel="stylesheet" href="../../css/feed.css">
-<body>
-    <div class="main_container">
-        <%- include('include/navbar.ejs') %>
-        <div class="container">
-            <div class="sidebar">
-                <%- include('include/sidebar.ejs', { page: 'feed' }) %>
-            </div>
-            <div class="middle">
-                <div class="feedDiv" id="allFeedDiv">
-                    <div style="width:100%;display:grid;grid-template-columns: 55% 1% 44%;">
-                        <div class="statuscontainer">
-                            <div class="todaystatus mystatus" style="background-color: #caabff;">
-                                <img src="/uploads/default_profile.png" alt="Default Profile Image">
+    <link rel="stylesheet" href="../../css/feed.css">
+
+    <body>
+        <div class="main_container">
+            <%- include('include/navbar.ejs') %>
+                <div class="container">
+                    <div class="sidebar">
+                        <%- include('include/sidebar.ejs', { page: 'feed' }) %>
+                    </div>
+                    <div class="middle">
+                        <div class="feedDiv" id="allFeedDiv">
+                            <div style="width:100%;display:grid;grid-template-columns: 55% 1% 44%;">
+                                <div class="statuscontainer">
+                                    <div class="todaystatus mystatus" style="background-color: #caabff;">
+                                        <img src="/uploads/default_profile.png" alt="Default Profile Image">
+                                    </div>
+                                    <div class="todaystatus ostatus">
+                                        <img src="/uploads/default_profile.png" alt="Default Profile Image">
+                                    </div>
+                                    <div class="todaystatus ostatus">
+                                        <img src="/uploads/default_profile.png" alt="Default Profile Image">
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="statuscontainer">
+                                    <div class="post_something">
+
+                                        Post Something
+                                    </div>
+                                    <div class="newpost" style="margin-top:10px">
+                                        <div class="wrap">
+                                            <div class="comment">
+                                                <!-- {{-- <input type="text" class="commentTerm" placeholder="Write here"> --}} -->
+                                                <textarea onclick="toggletonewpost()" name="" class="commentTerm" id=""
+                                                    cols="30" rows="1" placeholder="Write your post"></textarea>
+                                                <button type="submit" class="commentButton">
+                                                    <i class="fa-regular fa-images"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="todaystatus ostatus">
-                                <img src="/uploads/default_profile.png" alt="Default Profile Image">
-                            </div>
-                            <div class="todaystatus ostatus">
-                                <img src="/uploads/default_profile.png" alt="Default Profile Image">
+                            <div class="feedcontainer">
+                                <div class="feed">
+                                    <div class="userinfo">
+                                        <div class="userprofile">
+
+                                            <img src="http://designio.test/default_profile.png"
+                                                alt="Default Profile Image">
+                                        </div>
+                                        <div class="username">
+                                            <div>
+                                                bbk@bhuvan
+                                                <div class="time" style="font-size: 10px;">
+                                                    1 year ago
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="discription">
+                                        new look
+
+                                    </div>
+                                    <div class="artwork">
+                                        <img src="http://designio.test/storage/posts/PTfXAn5WczL4CToBC1O9rZiOKPyNagcsSmtQ9nUq.jpg"
+                                            alt="">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+
+                                    </div>
+                                    <div class="reach">
+                                        <div class="commentcount">
+                                            <i class="fa-regular fa-comment"></i>
+                                            25 Comments
+                                        </div>
+                                        <div class="likes">
+                                            <div class="likeDiv" onclick="likeme(15,10)" style="display:inline-block">
+                                                <span><i class="press" id="mylikeicon15"></i></span>
+                                                <span id="mylikecuunt15">3</span> Like
+                                            </div>
+                                        </div>
+                                        <div class="save" style="text-align:right;margin-right:50px">
+                                            <i class="fa-regular fa-bookmark"></i> Save
+                                        </div>
+                                    </div>
+                                    <div class="comments">
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <div class="wrap">
+                                            <div class="comment">
+                                                <input type="text" class="commentTerm" placeholder="Comment">
+                                                <button type="submit" class="commentButton">
+                                                    <span class="material-symbols-outlined">
+                                                        search
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        bbk, bhuvan bam, acting, fashion designer
+                                    </div>
+                                </div>
+                                <div class="feed">
+                                    <div class="userinfo">
+                                        <div class="userprofile">
+
+                                            <img src="http://designio.test/default_profile.png"
+                                                alt="Default Profile Image">
+                                        </div>
+                                        <div class="username">
+                                            <div>
+                                                bbk@bhuvan
+                                                <div class="time" style="font-size: 10px;">
+                                                    1 year ago
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="discription">
+                                        Me rolling my father
+
+                                    </div>
+                                    <div class="artwork">
+                                        <img src="http://designio.test/storage/posts/StHLVSKlmi8PU6BkqlOIEvotRgrTgtuHpkaxjy9A.jpeg"
+                                            alt="">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+
+                                    </div>
+                                    <div class="reach">
+                                        <div class="commentcount">
+                                            <i class="fa-regular fa-comment"></i>
+                                            25 Comments
+                                        </div>
+                                        <div class="likes">
+                                            <div class="likeDiv" onclick="likeme(14,10)" style="display:inline-block">
+                                                <span><i class="press" id="mylikeicon14"></i></span>
+                                                <span id="mylikecuunt14">1</span> Like
+                                            </div>
+                                        </div>
+                                        <div class="save" style="text-align:right;margin-right:50px">
+                                            <i class="fa-regular fa-bookmark"></i> Save
+                                        </div>
+                                    </div>
+                                    <div class="comments">
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <div class="wrap">
+                                            <div class="comment">
+                                                <input type="text" class="commentTerm" placeholder="Comment">
+                                                <button type="submit" class="commentButton">
+                                                    <span class="material-symbols-outlined">
+                                                        search
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        Father, Acting, bbk, bhuvan bam, Fashion Design
+                                    </div>
+                                </div>
+                                <div class="feed">
+                                    <div class="userinfo">
+                                        <div class="userprofile">
+
+                                            <img src="http://designio.test/default_profile.png"
+                                                alt="Default Profile Image">
+                                        </div>
+                                        <div class="username">
+                                            <div>
+                                                bbk@bhuvan
+                                                <div class="time" style="font-size: 10px;">
+                                                    1 year ago
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="discription">
+                                        During Fashion event of RollingStone.
+
+                                    </div>
+                                    <div class="artwork">
+                                        <img src="http://designio.test/storage/posts/GqrHbcWrfZQbTWVfZLdMwPDbgJn9g4wKY9zNuE7e.jpeg"
+                                            alt="">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+
+                                    </div>
+                                    <div class="reach">
+                                        <div class="commentcount">
+                                            <i class="fa-regular fa-comment"></i>
+                                            25 Comments
+                                        </div>
+                                        <div class="likes">
+                                            <div class="likeDiv" onclick="likeme(13,10)" style="display:inline-block">
+                                                <span><i class="press" id="mylikeicon13"></i></span>
+                                                <span id="mylikecuunt13">2</span> Like
+                                            </div>
+                                        </div>
+                                        <div class="save" style="text-align:right;margin-right:50px">
+                                            <i class="fa-regular fa-bookmark"></i> Save
+                                        </div>
+                                    </div>
+                                    <div class="comments">
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <div class="wrap">
+                                            <div class="comment">
+                                                <input type="text" class="commentTerm" placeholder="Comment">
+                                                <button type="submit" class="commentButton">
+                                                    <span class="material-symbols-outlined">
+                                                        search
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        RollingStone, rolling stone, Fashion Design, bbk, bhuvan bam
+                                    </div>
+                                </div>
+                                <div class="feed">
+                                    <div class="userinfo">
+                                        <div class="userprofile">
+
+                                            <img src="http://designio.test/default_profile.png"
+                                                alt="Default Profile Image">
+                                        </div>
+                                        <div class="username">
+                                            <div>
+                                                bbk@bhuvan
+                                                <div class="time" style="font-size: 10px;">
+                                                    1 year ago
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="discription">
+                                        Its purple, My new coat with matching wall
+
+                                    </div>
+                                    <div class="artwork">
+                                        <img src="http://designio.test/storage/posts/BWO4kk9pTlxol7kDcl70pHzRAQEu314HgqIkmhzi.webp"
+                                            alt="">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+
+                                    </div>
+                                    <div class="reach">
+                                        <div class="commentcount">
+                                            <i class="fa-regular fa-comment"></i>
+                                            25 Comments
+                                        </div>
+                                        <div class="likes">
+                                            <div class="likeDiv" onclick="likeme(12,10)" style="display:inline-block">
+                                                <span><i class="press" id="mylikeicon12"></i></span>
+                                                <span id="mylikecuunt12">3</span> Like
+                                            </div>
+                                        </div>
+                                        <div class="save" style="text-align:right;margin-right:50px">
+                                            <i class="fa-regular fa-bookmark"></i> Save
+                                        </div>
+                                    </div>
+                                    <div class="comments">
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <div class="wrap">
+                                            <div class="comment">
+                                                <input type="text" class="commentTerm" placeholder="Comment">
+                                                <button type="submit" class="commentButton">
+                                                    <span class="material-symbols-outlined">
+                                                        search
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        bbk, bhuvan bam, coat, Fashion Design, look, purple
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <div>
-                </div>
-                <div class="statuscontainer">
-                    <div class="post_something">
-                        
-                        Post Something
-                    </div>
-                    <div class="newpost" style="margin-top:10px">
-                        <div class="wrap">
-                            <div class="comment">
-                                <!-- {{-- <input type="text" class="commentTerm" placeholder="Write here"> --}} -->
-                                <textarea onclick="toggletonewpost()" name="" class="commentTerm" id="" cols="30" rows="1" placeholder="Write your post"></textarea>
-                                <button type="submit" class="commentButton">
-                                <i class="fa-regular fa-images"></i>
-                                </button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-            </div>
         </div>
-    </div>
-</body>
+    </body>
+
 </html>
