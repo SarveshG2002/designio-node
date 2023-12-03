@@ -28,6 +28,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    console.log('body',req.body);
 
     try {
         const user = await authController.authenticateUser(email, password);
@@ -87,6 +88,10 @@ router.get('/profile', (req, res) => {
     }
     
 });
+
+router.post('/test',(req,res)=>{
+    console.log(req.body);
+})
 
 router.post('/update_profile' , authController.updateProfile);
 

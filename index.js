@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth'); // Import the auth.js file
 const postsRoutes = require('./routes/posts');
 const listEndpoints = require('express-list-endpoints');
+const multer = require('multer');
+const upload = multer();
 
 process.env.TZ = 'Asia/Kolkata';
 
@@ -23,6 +25,7 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(express.urlencoded({ extended: true }));
+app.use(upload.array());
 mongoose.connect('mongodb://localhost:27017/designio', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('debug', true);
 app.use('/auth', authRoutes);
@@ -38,6 +41,19 @@ app.set('views', path.join(__dirname,'public', 'view'));
 // Define a route for the home page
 app.get('/', (req, res) => {
   res.redirect('auth/login');
+});
+
+app.get('/testhtml',(req,res)=>{
+  res.render('test',{'hello':'get','data':req.body});
+});
+
+app.post('/testhtml',(req,res)=>{
+  console.log(req.body);
+  res.render('test',{'hello':'post',data:req.body});
+});
+
+app.post('/test',(req,res)=>{
+  console.log(req.body);
 });
 
 app.use(express.static('public/public'));
