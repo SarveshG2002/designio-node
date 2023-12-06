@@ -17,13 +17,8 @@ const storage =  multer.diskStorage({
 })
 
 const upload = multer({ storage: storage });
-// router.get('/posts', postController.getAllPosts);
 router.post('/addpost',upload.single('postImage'), postController.addNewPost);
-// Add other post-related routes as needed
-// router.post('/addpost',upload.single('postImage'), (req,res)=>{
-//     console.log(req.body);
-//     console.log(req.file);
-// });
+
 
 
 module.exports = router;

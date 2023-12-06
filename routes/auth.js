@@ -11,8 +11,6 @@ router.get('/login', (req, res) => {
     console.log(req.session.user)
     // console.log(user)
     if (user) {
-        // res.sendFile(path.join(__dirname, '../public/view/profile.ejs'));
-        // res.send(`Welcome, ${user.username}!`);
         if(user.status=="complete"){
 
             res.render('home');
@@ -62,6 +60,13 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/logout', (req, res) => {
+    // Use the authentication controller's logout function to clear the session
+    req.session.destroy();
+
+    // Redirect to the home page or any other desired page after logout
+    res.redirect('/');
+});
 
 // Define a route for user registration
 router.get('/register', (req, res) => {
@@ -89,7 +94,7 @@ router.get('/profile', (req, res) => {
     
 });
 
-router.post('/test',(req,res)=>{
+router.post('/logout',(req,res)=>{
     console.log(req.body);
 })
 
