@@ -27,7 +27,7 @@
                 Feed
             </div>
         </div>
-        <div class="navigation" onclick="loadmypage('explore')">
+        <div class="navigation" onclick="loadmypage('auth/explore')">
             <div class="<%= (locals.page === 'explore') ? 'indicator' : '' %>"></div>
             <div class="inditext">
                 <span class="material-symbols-outlined">travel_explore</span>
@@ -35,7 +35,7 @@
                 Explore
             </div>
         </div>
-        <div class="navigation" onclick="loadmypage('friends')">
+        <div class="navigation" onclick="loadmypage('auth/friends')">
             <div class="<%= (locals.page === 'friends') ? 'indicator' : '' %>"></div>
             <div class="inditext">
                 <span class="material-symbols-outlined">diversity_3</span>
@@ -43,7 +43,7 @@
                 Friends
             </div>
         </div>
-        <div class="navigation" onclick="loadmypage('group')">
+        <div class="navigation" onclick="loadmypage('auth/group')">
             <div class="<%= (locals.page === 'group') ? 'indicator' : '' %>"></div>
             <div class="inditext">
                 <span class="material-symbols-outlined">group</span>
@@ -51,7 +51,7 @@
                 Messages
             </div>
         </div>
-        <div class="navigation" onclick="loadmypage('trending')">
+        <div class="navigation" onclick="loadmypage('auth/trending')">
             <div class="<%= (locals.page === 'trending') ? 'indicator' : '' %>"></div>
             <div class="inditext">
                 <span class="material-symbols-outlined">chart_data</span>
@@ -59,7 +59,7 @@
                 Trending
             </div>
         </div>
-        <div class="navigation" onclick="loadmypage('setting')">
+        <div class="navigation" onclick="loadmypage('auth/setting')">
             <div class="<%= (locals.page === 'setting') ? 'indicator' : '' %>"></div>
             <div class="inditext">
                 <span class="material-symbols-outlined">settings</span>
@@ -72,6 +72,6 @@
 
 <script>
     function loadmypage(page) {
-        
+        window.location.href='/'+page;
     }
 </script>

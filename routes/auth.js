@@ -8,7 +8,25 @@ const authController = require('../controllers/AuthController');
 // Define a route for user login
 router.get('/login', (req, res) => {
     const user = req.session.user;
-    console.log(req.session.user)
+    // console.log(req.session.user)
+    // console.log(user)
+    if (user) {
+        if(user.status=="complete"){
+
+            res.redirect('/auth/home');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+    
+});
+
+router.get('/home', (req, res) => {
+    const user = req.session.user;
+    // console.log(req.session.user)
     // console.log(user)
     if (user) {
         if(user.status=="complete"){
@@ -24,9 +42,83 @@ router.get('/login', (req, res) => {
     
 });
 
+router.get('/explore', (req, res) => {
+    const user = req.session.user;
+    if (user) {
+        if(user.status=="complete"){
+
+            res.render('explore');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+});
+
+router.get('/friends', (req, res) => {
+    const user = req.session.user;
+    if (user) {
+        if(user.status=="complete"){
+
+            res.render('friends');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+});
+router.get('/group', (req, res) => {
+    const user = req.session.user;
+    if (user) {
+        if(user.status=="complete"){
+
+            res.render('group');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+});
+router.get('/setting', (req, res) => {
+    const user = req.session.user;
+    if (user) {
+        if(user.status=="complete"){
+
+            res.render('setting');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+});
+router.get('/trending', (req, res) => {
+    const user = req.session.user;
+    if (user) {
+        if(user.status=="complete"){
+
+            res.render('trending');
+        }else{
+            res.redirect('profile');
+        }
+        
+    } else {
+        res.render('login');
+    }
+});
+
+
+
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    console.log('body',req.body);
+    // console.log('body',req.body);
 
     try {
         const user = await authController.authenticateUser(email, password);
@@ -55,7 +147,7 @@ router.post('/login', async (req, res) => {
             res.redirect('/auth/login');
         }
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -78,7 +170,7 @@ router.post('/register', authController.registerUser);
 
 router.get('/profile', (req, res) => {
     const user = req.session.user;
-    console.log(req.session.user)
+    // console.log(req.session.user)
     if (user) {
         // res.sendFile(path.join(__dirname, '../public/view/profile.html'));
         // res.send(`Welcome, ${user.username}!`);
@@ -94,9 +186,6 @@ router.get('/profile', (req, res) => {
     
 });
 
-router.post('/logout',(req,res)=>{
-    console.log(req.body);
-})
 
 router.post('/update_profile' , authController.updateProfile);
 
