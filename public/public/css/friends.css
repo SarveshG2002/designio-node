@@ -1,0 +1,136 @@
+*{
+    font-family: 'AR One Sans', sans-serif;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    color: #673ab7;
+}
+.middle{
+    /* background-color: aquamarine; */
+}
+.middle .feedDiv{
+    width: 90%;
+    /* height: 200px; */
+    
+    margin: 10px auto;
+}
+
+.middle .feedDiv .statuscontainer{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    display: inline-block;
+}
+
+
+
+
+.middle .feedDiv .statuscontainer .newpost input{
+    width: 90%;
+    border: none;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 15px 0 0 15px;
+    outline: none;
+    color: #673ab7;
+    background-color: #eeeeee;
+}
+
+.middle .feedDiv .statuscontainer .newpost button{
+    width: 40px;
+    height: 36px;
+    border: 1px solid #eeeeee;
+    background: #eeeeee;
+    text-align: center;
+    color: #949494;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.middle .feedDiv .statuscontainer .post_something{
+    font-family: 'AR One Sans', sans-serif;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    padding-left: 10px;
+    /* padding-bottom: 10px; */
+    font-size: 30px;
+    /* border-width: 0px 0px 1px 0px; */
+    /* border-style: ridge; */
+}
+
+
+
+
+
+
+
+.friendList .flistdiv{
+    width: 85%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 10% 80% auto;
+    font-size: 13px;
+    border-radius: 20px;
+    margin: 20px auto;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+.friendList .flistdiv .fname .name{
+    font-size: 30px;
+}
+
+.friendList .flistdiv .profileimg{
+    width: 100%;
+}
+
+.friendList .flistdiv .profileimg .img , img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.friendList .flistdiv .status .time{
+    height: 100%;
+    /* padding: 80px 0;
+  border: 3px solid green; */
+}
+.friendList .flistdiv .status button{
+    text-align: center;
+    margin-top: 10px;
+    background-color: #673ab7;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    width: fir-content;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

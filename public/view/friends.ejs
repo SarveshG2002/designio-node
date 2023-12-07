@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('include/layout-header.ejs') %>
-    <link rel="stylesheet" href="../../css/feed.css">
+    <link rel="stylesheet" href="../../css/friends.css">
 
     <body>
         <div class="main_container">
@@ -11,8 +11,99 @@
                         <%- include('include/sidebar.ejs', { page: 'friends' }) %>
                     </div>
                     <div class="middle">
-                        setting
-                    </div>
-    </body>
+                        <div class="feedDiv" id="allFeedDiv">
+                            <div class="statuscontainer">
+                                <div class="post_something">
+                                    Friends
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="feedDiv" id="allFeedDiv">
+                            <div class="statuscontainer">
+                                <div class="wrap">
+                                    <div class="search">
+                                       <input type="text" class="searchTerm" placeholder="Search">
+                                       <button type="submit" class="searchButton">
+                                            <span class="material-symbols-outlined">
+                                                search
+                                            </span>
+                                      </button>
+                                    </div>
+                                </div>
+                                <div class="friendList" style="height: 80vh;overflow-x:auto">
+                                    <div class="headFriend">
+                                        <h1>My Friends</h1>
+                                    </div>
+                                    <div class="flistdiv" onclick="">
+                                        <div class="profileimg">
+                                            <div class="img">
+                                              
+                                                <img src="/uploads/default_profile.png" alt="Profile Image">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="fname">
+                                            <div class="name">
+                                                Sarvesh
+                                            </div>
+                                            <div class="msg">
+                                                Be kind
+                                            </div>
+                                        </div>
+                                        <div class="status" style="padding-left:10px">
+                                            <div class="date">
+                                                <p style="margin-top: 10px">23-03-2022</p>
+                                            </div>
+                                            <div class="time">
+                                                <button id="reqbut" onclick="" style="background-color:grey">
+                                                    Followed
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="headFriend">
+                                        <h1>Other</h1>
+                                    </div>
+    
+                                    <div class="flistdiv">
+                                        <div class="profileimg">
+                                            <div class="img">
+                                               
+                                                <img src="/uploads/default_profile.png" alt="Profile Image">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="fname">
+                                            <div class="name">
+                                               Chand
+                                            </div>
+                                            <div class="msg">
+                                                Be Kind
+                                            </div>
+                                        </div>
+                                        <div class="status" style="padding-left:10px">
+                                            <div class="date">
+                                                <p style="margin-top: 10px">23-03-2022</p>
+                                            </div>
+                                            <div class="time">
+                                                <button id="reqbut" onclick="">
+                                                    Follow
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="../../js/friends.js"></script>    
 </html>
