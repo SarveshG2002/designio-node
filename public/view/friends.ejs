@@ -8,7 +8,7 @@
             <%- include('include/navbar.ejs') %>
                 <div class="container">
                     <div class="sidebar">
-                        <%- include('include/sidebar.ejs', { page: 'friends' }) %>
+                        <%- include('include/sidebar.ejs', { page: 'friends' , session: session }) %>
                     </div>
                     <div class="middle">
                         <div class="feedDiv" id="allFeedDiv">
@@ -87,7 +87,7 @@
                                                 <p style="margin-top: 10px">23-03-2022</p>
                                             </div>
                                             <div class="time">
-                                                <button id="reqbut" onclick="">
+                                                <button id="reqbut" onclick="followme()">
                                                     Follow
                                                 </button>
                                             </div>

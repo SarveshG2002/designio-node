@@ -31,7 +31,7 @@ router.get('/home', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('home');
+            res.render('home',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -47,7 +47,7 @@ router.get('/explore', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('explore');
+            res.render('explore',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -62,7 +62,7 @@ router.get('/friends', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('friends');
+            res.render('friends',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -76,7 +76,7 @@ router.get('/group', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('group');
+            res.render('group',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -90,7 +90,7 @@ router.get('/setting', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('setting');
+            res.render('setting',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -104,7 +104,7 @@ router.get('/trending', (req, res) => {
     if (user) {
         if(user.status=="complete"){
 
-            res.render('trending');
+            res.render('trending',{'session':user});
         }else{
             res.redirect('profile');
         }
@@ -127,9 +127,10 @@ router.post('/login', async (req, res) => {
             // Store user information in the session
             if(user[1]=="complete"){
                 req.session.user = {
-                    username: user[0].username,
+                    username: user[2].username,
                     email: user[0].email,
                     status : user[1],
+                    name : user[0].name,
                     _id: user[0]._id,
                 };
             }else{

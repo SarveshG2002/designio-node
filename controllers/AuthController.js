@@ -14,7 +14,7 @@ async function authenticateUser(email, password) {
     if (user && await bcrypt.compare(password, user.password)) {
       const userProfile = await Profile.findOne({user_id:user._id})
       if(userProfile){
-        return [user,"complete"];
+        return [user,"complete",userProfile];
       }
       return [user,"profile_pending"];
     }

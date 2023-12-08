@@ -24,8 +24,9 @@ function followme(id) {
     // Send the AJAX request with the auth token
     $.ajax({
         type: 'POST',
-        url: '/api/friend/followfriend/'+id,
+        url: '/friend/followfriend/',
         // dataType: 'json',
+        data: {'id':id},
         headers: {
             // Set the Authorization header with the bearer token
             Authorization: 'Bearer ' + document.getElementById('tok').value,
