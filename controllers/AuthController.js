@@ -25,6 +25,44 @@ async function authenticateUser(email, password) {
   }
 }
 
+async function getAllUser(req) {
+  try {
+    const user = req.session.user;
+
+    const allUsersCursor = await User.find({ email: { $ne: user.email } });
+    const userIds = allUsersCursor.map(user => user._id);
+
+    const usersWithProfile = await User.aggregate([
+      {
+        $match: { _id: { $in: userIds } }
+      },
+      {
+        $lookup: {
+          from: 'profiles',
+          localField: '_id',
+          foreignField: 'user_id',
+          as: 'profileArray'
+        }
+      },
+      {
+        $addFields: {
+          profile: { $arrayElemAt: ['$profileArray', 0] }
+        }
+      },
+      {
+        $project: {
+          profileArray: 0
+        }
+      }
+    ]).exec();
+
+    return usersWithProfile;
+  } catch (error) {
+    console.error('Error retrieving users:', error);
+    throw error;
+  }
+}
+
 async function registerUser(req, res) {
   try {
     const { name, email, password } = req.body;
@@ -152,4 +190,5 @@ module.exports = {
   authenticateUser,
   registerUser,
   updateProfile,
+  getAllUser,
 };

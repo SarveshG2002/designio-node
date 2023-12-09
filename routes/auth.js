@@ -57,16 +57,24 @@ router.get('/explore', (req, res) => {
     }
 });
 
-router.get('/friends', (req, res) => {
+router.get('/friends', async (req, res) => {
     const user = req.session.user;
+    
     if (user) {
-        if(user.status=="complete"){
-
-            res.render('friends',{'session':user});
-        }else{
+        if (user.status === "complete") {
+            try {
+                // Use await to properly handle the asynchronous function getAllUser
+                const friends = await authController.getAllUser(req);
+                console.log(friends);
+                // Render the friends template with the user session and friends data
+                res.render('friends', { session: user, friends: friends });
+            } catch (error) {
+                console.error('Error fetching friends:', error);
+                res.status(500).send('Internal Server Error');
+            }
+        } else {
             res.redirect('profile');
         }
-        
     } else {
         res.render('login');
     }
