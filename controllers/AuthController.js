@@ -3,6 +3,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
+const Follower = require('../models/Friend.js'); 
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -25,16 +26,17 @@ async function authenticateUser(email, password) {
   }
 }
 
-async function getAllUser(req) {
+async function getFollowedUsers(req) {
   try {
     const user = req.session.user;
 
-    const allUsersCursor = await User.find({ email: { $ne: user.email } });
-    const userIds = allUsersCursor.map(user => user._id);
+    // Find the user's friends (users whom the current user follows)
+    const followedUserIds = await Follower.find({ user_id: user._id }).distinct('followed_user_id');
 
-    const usersWithProfile = await User.aggregate([
+    // Use the followedUserIds to filter users in the Users collection
+    const followedUsers = await User.aggregate([
       {
-        $match: { _id: { $in: userIds } }
+        $match: { _id: { $in: followedUserIds } }
       },
       {
         $lookup: {
@@ -56,12 +58,13 @@ async function getAllUser(req) {
       }
     ]).exec();
 
-    return usersWithProfile;
+    return followedUsers;
   } catch (error) {
-    console.error('Error retrieving users:', error);
+    console.error('Error retrieving followed users:', error);
     throw error;
   }
 }
+
 
 async function registerUser(req, res) {
   try {
@@ -190,5 +193,5 @@ module.exports = {
   authenticateUser,
   registerUser,
   updateProfile,
-  getAllUser,
+  getFollowedUsers,
 };

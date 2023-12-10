@@ -64,7 +64,7 @@ router.get('/friends', async (req, res) => {
         if (user.status === "complete") {
             try {
                 // Use await to properly handle the asynchronous function getAllUser
-                const friends = await authController.getAllUser(req);
+                const friends = await authController.getFollowedUsers(req);
                 console.log(friends);
                 // Render the friends template with the user session and friends data
                 res.render('friends', { session: user, friends: friends });
