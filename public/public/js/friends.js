@@ -13,25 +13,24 @@ function getCookie(name) {
 
 function followme(id) {
     
-    const authToken = getCookie('XSRF-TOKEN');
+    // const authToken = getCookie('XSRF-TOKEN');
 
-    // Check if the auth_token cookie is present
-    if (!authToken) {
-        console.error('Auth token cookie not found');
-        return;
-    }
+    // // Check if the auth_token cookie is present
+    // if (!authToken) {
+    //     console.error('Auth token cookie not found');
+    //     return;
+    // }
 
-    // Send the AJAX request with the auth token
+    // // Send the AJAX request with the auth token
     $.ajax({
         type: 'POST',
         url: '/friend/followfriend/',
-        // dataType: 'json',
+        dataType: 'json',
         data: {'id':id},
         headers: {
-            // Set the Authorization header with the bearer token
-            Authorization: 'Bearer ' + document.getElementById('tok').value,
         },
         success: function (data) {
+            console.log('Follow request sent successfully',data);
             // Request was successful
             if(data.message == "Followed successfully"){
                 document.getElementById('reqbut'+id).textContent="Followed"
@@ -40,7 +39,7 @@ function followme(id) {
                 document.getElementById('reqbut'+id).textContent="Follow"
                 document.getElementById('reqbut'+id).style.backgroundColor = "#673ab7"
             }
-            console.log('Follow request sent successfully',data);
+           
             // You can perform further actions here if needed
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -48,4 +47,5 @@ function followme(id) {
             console.error('Follow request failed');
         },
     })
+    // console.log(id)
 }

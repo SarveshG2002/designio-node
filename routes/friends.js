@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const friendController = require('../controllers/FriendController');
 
-
-router.post('/followfriend', (req, res) => {
-    // res.sendFile(path.join(__dirname, '../public/view/register.html'));
-    res.json({})
-});
+router.post('/followfriend', friendController.followfriend);
 
 
 
