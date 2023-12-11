@@ -35,38 +35,39 @@
                                     <div class="headFriend">
                                         <h1>My Friends</h1>
                                     </div>
-                                        
-                                    <div class="flistdiv" onclick="">
-                                        <div class="profileimg">
-                                            <div class="img">
-                                              
-                                                <img src="/uploads/default_profile.png" alt="Profile Image">
+                                    <% friends.forEach(user => { %>
+                                        <div class="flistdiv" onclick="">
+                                            <div class="profileimg">
+                                                <div class="img">
                                                 
+                                                    <img src="/uploads/default_profile.png" alt="Profile Image">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="fname">
+                                                <div class="name">
+                                                    <%=user.name%>
+                                                </div>
+                                                <div class="msg">
+                                                    <%=user.profile.bio%>
+                                                </div>
+                                            </div>
+                                            <div class="status" style="padding-left:10px">
+                                                <div class="date">
+                                                    <p style="margin-top: 10px">23-03-2022</p>
+                                                </div>
+                                                <div class="time">
+                                                    <button id="reqbut<%=user._id%>" onclick="followme('<%=user._id%>')" style="background-color:grey">
+                                                        Followed
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="fname">
-                                            <div class="name">
-                                                Sarvesh
-                                            </div>
-                                            <div class="msg">
-                                                Be kind
-                                            </div>
-                                        </div>
-                                        <div class="status" style="padding-left:10px">
-                                            <div class="date">
-                                                <p style="margin-top: 10px">23-03-2022</p>
-                                            </div>
-                                            <div class="time">
-                                                <button id="reqbut" onclick="" style="background-color:grey">
-                                                    Followed
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <% }); %>
                                     <div class="headFriend">
                                         <h1>Other</h1>
                                     </div>
-                                    <% friends.forEach(user => { %>
+                                    <% notfriends.forEach(user => { %>
                                         <div class="flistdiv">
                                             <div class="profileimg">
                                                 <div class="img">

@@ -65,9 +65,12 @@ router.get('/friends', async (req, res) => {
             try {
                 // Use await to properly handle the asynchronous function getAllUser
                 const friends = await authController.getFollowedUsers(req);
+                console.log("----------------------------------------------------------")
+                const ufriends = await authController.getUnfollowedUsers(req);
+
                 console.log(friends);
                 // Render the friends template with the user session and friends data
-                res.render('friends', { session: user, friends: friends });
+                res.render('friends', { session: user, friends: friends, notfriends :ufriends });
             } catch (error) {
                 console.error('Error fetching friends:', error);
                 res.status(500).send('Internal Server Error');

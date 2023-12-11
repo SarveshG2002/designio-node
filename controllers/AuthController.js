@@ -6,6 +6,7 @@ const Profile = require('../models/Profile');
 const Follower = require('../models/Friend.js'); 
 const multer = require('multer');
 const path = require('path');
+const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 
 async function authenticateUser(email, password) {
@@ -33,10 +34,13 @@ async function getFollowedUsers(req) {
     // Find the user's friends (users whom the current user follows)
     const followedUserIds = await Follower.find({ user_id: user._id }).distinct('followed_user_id');
 
-    // Use the followedUserIds to filter users in the Users collection
+    // Convert string user IDs to ObjectId instances
+    const followedUserIdsObjectIds = followedUserIds.map(userId => new mongoose.Types.ObjectId(userId));
+
+    // Use the followedUserIdsObjectIds to filter users in the Users collection
     const followedUsers = await User.aggregate([
       {
-        $match: { _id: { $in: followedUserIds } }
+        $match: { _id: { $in: followedUserIdsObjectIds } }
       },
       {
         $lookup: {
@@ -58,9 +62,55 @@ async function getFollowedUsers(req) {
       }
     ]).exec();
 
+    console.log('followedUsers:', followedUsers);
     return followedUsers;
   } catch (error) {
     console.error('Error retrieving followed users:', error);
+    throw error;
+  }
+}
+
+
+async function getUnfollowedUsers(req) {
+  try {
+    const user = req.session.user;
+
+    // Find the user's friends (users whom the current user follows)
+    const followedUserIds = await Follower.find({ user_id: user._id }).distinct('followed_user_id');
+
+    // Find all user IDs excluding the ones the current user follows
+    const unfollowedUserIds = await User.find({ _id: { $nin: followedUserIds } }).distinct('_id');
+
+    console.log('followedUserIds:', unfollowedUserIds);
+
+    // Use the unfollowedUserIds to get users in the Users collection
+    const unfollowedUsers = await User.aggregate([
+      {
+        $match: { _id: { $in: unfollowedUserIds } }
+      },
+      {
+        $lookup: {
+          from: 'profiles',
+          localField: '_id',
+          foreignField: 'user_id',
+          as: 'profileArray'
+        }
+      },
+      {
+        $addFields: {
+          profile: { $arrayElemAt: ['$profileArray', 0] }
+        }
+      },
+      {
+        $project: {
+          profileArray: 0
+        }
+      }
+    ]).exec();
+
+    return unfollowedUsers;
+  } catch (error) {
+    console.error('Error retrieving unfollowed users:', error);
     throw error;
   }
 }
@@ -194,4 +244,5 @@ module.exports = {
   registerUser,
   updateProfile,
   getFollowedUsers,
+  getUnfollowedUsers,
 };

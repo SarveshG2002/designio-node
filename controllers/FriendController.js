@@ -6,7 +6,7 @@ async function followOrUnfollow(req, res) {
     try {
         const { id } = req.body;
         const followerEntry = await Follower.findOne({
-            user_id: req.session.id,
+            user_id: req.session.user._id,
             followed_user_id: id,
         });
 
@@ -17,7 +17,7 @@ async function followOrUnfollow(req, res) {
         } else {
             // If the entry does not exist, create it (follow)
             const newFollower = new Follower({
-                user_id: req.session.id,
+                user_id: req.session.user._id,
                 followed_user_id: id,
             });
             await newFollower.save();
