@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const authController = require('../controllers/AuthController');
+const postController = require('../controllers/PostController');
 
 // Define a route for user login
 router.get('/login', (req, res) => {
@@ -24,13 +25,14 @@ router.get('/login', (req, res) => {
     
 });
 
-router.get('/home', (req, res) => {
+router.get('/home', async (req, res) => {
     const user = req.session.user;
     // console.log(req.session.user)
     // console.log(user)
     if (user) {
         if(user.status=="complete"){
-
+            let posts=await postController.getAllPostByUser(user._id);
+            console.log('posts: ',posts);
             res.render('home',{'session':user});
         }else{
             res.redirect('profile');

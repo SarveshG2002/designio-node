@@ -1,5 +1,60 @@
 const Post = require('../models/Post'); // Make sure to adjust the path based on your project structure
+const Friend = require('../models/Friend.js'); 
+const mongoose = require('mongoose');
 const fs = require('fs').promises;
+
+async function getAllPostByUser(userId) {
+    try {
+      const result = await Friend.aggregate([
+        {
+          $match: {
+            user_id: new mongoose.Types.ObjectId(userId)
+          }
+        },
+        {
+          $lookup: {
+            from: 'posts',
+            localField: 'followed_user_id',
+            foreignField: 'uid',
+            as: 'friend_posts'
+          }
+        },
+        {
+          $unwind: '$friend_posts'
+        },
+        {
+          $lookup: {
+            from: 'profiles',
+            localField: 'friend_posts.uid',
+            foreignField: 'user_id',
+            as: 'profile'
+          }
+        },
+        {
+          $unwind: '$profile'
+        },
+        {
+          $project: {
+            _id: 0,
+            post: '$friend_posts',
+            username: '$profile.username',
+            profile: '$profile.profile'
+          }
+        },
+        {
+          $sort: {
+            'post.created_at': -1
+          }
+        }
+      ]);
+  
+      return result;
+    } catch (error) {
+      console.error('Error fetching friend posts:', error);
+      throw error;
+    }
+  }
+
 
 async function addNewPost(req, res) {
     try {
@@ -34,6 +89,11 @@ async function addNewPost(req, res) {
     }
 }
 
+
+
+
+
 module.exports = {
     addNewPost,
+    getAllPostByUser,
 };
